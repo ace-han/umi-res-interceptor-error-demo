@@ -76,7 +76,7 @@ export default {
           originalRequestConfig._retry = true;
           isRefreshing = true;
 
-          return new Promise((resolve, reject) => {
+          return new Promise<any>((resolve, reject) => {
             request<API.TokenRefreshResult>('/api/v1/auth/token/refresh', {
               method: 'POST',
               noAuth: true, // skip access_token requestInterceptors
@@ -93,7 +93,7 @@ export default {
                 processQueue(null, resp.access);
                 request(originalRequestConfig.url!, originalRequestConfig).then(
                   (r) => {
-                    resolve(r);
+                    resolve({ data: r });
                   },
                 );
               })
